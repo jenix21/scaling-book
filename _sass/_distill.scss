@@ -304,8 +304,8 @@ mjx-container {
   }
 
   d-article table {
-    display: block;
-    overflow-x: auto;
+    width: 100%;
+    min-width: 100%;
   }
 
   // Keep navbar expanded on small screens
