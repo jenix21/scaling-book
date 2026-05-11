@@ -1,0 +1,71 @@
+# Translation status registry.
+#
+# Single source of truth for which chapters have a Korean translation and
+# whether that translation is up to date with its English source.
+#
+# Consumed by:
+#   - _includes/language_switcher.liquid  (decides if the EN<->KO toggle is active)
+#   - bin/check_translation_freshness.py  (cross-checks against git history)
+#
+# `slug` is the filename of the English source without `.md`. The slug `index`
+# is the front page; otherwise English lives at /<slug> and Korean at /ko/<slug>.
+#
+# `status`:
+#   complete    — translation matches the source_commit recorded in ko/<slug>.md
+#   in_progress — translation has started but is not yet ready to expose in the switcher
+#   stale       — English source has changed since the recorded source_commit
+#   missing     — no Korean version yet
+
+chapters:
+  - slug: index
+    title_en: "How to Scale Your Model"
+    title_ko: "모델을 어떻게 스케일링할 것인가"
+    status: complete
+  - slug: roofline
+    title_en: "All About Rooflines"
+    title_ko: "루프라인의 모든 것"
+    status: missing
+  - slug: tpus
+    title_en: "How to Think About TPUs"
+    title_ko: "TPU를 어떻게 생각할 것인가"
+    status: missing
+  - slug: sharding
+    title_en: "Sharded Matrices and How to Multiply Them"
+    title_ko: "샤딩된 행렬과 그것을 곱하는 법"
+    status: missing
+  - slug: transformers
+    title_en: "All the Transformer Math You Need to Know"
+    title_ko: "알아야 할 트랜스포머 수학 전부"
+    status: missing
+  - slug: training
+    title_en: "How to Parallelize a Transformer for Training"
+    title_ko: "학습을 위해 트랜스포머를 병렬화하는 법"
+    status: missing
+  - slug: applied-training
+    title_en: "Training LLaMA 3 on TPUs"
+    title_ko: "TPU에서 LLaMA 3 학습하기"
+    status: missing
+  - slug: inference
+    title_en: "All About Transformer Inference"
+    title_ko: "트랜스포머 추론의 모든 것"
+    status: missing
+  - slug: applied-inference
+    title_en: "Serving LLaMA 3 on TPUs"
+    title_ko: "TPU에서 LLaMA 3 서빙하기"
+    status: missing
+  - slug: profiling
+    title_en: "How to Profile TPU Code"
+    title_ko: "TPU 코드 프로파일링 하는 법"
+    status: missing
+  - slug: jax-stuff
+    title_en: "Programming TPUs in JAX"
+    title_ko: "JAX로 TPU 프로그래밍하기"
+    status: missing
+  - slug: conclusion
+    title_en: "Conclusions and Further Reading"
+    title_ko: "결론과 더 읽을거리"
+    status: missing
+  - slug: gpus
+    title_en: "How to Think About GPUs"
+    title_ko: "GPU를 어떻게 생각할 것인가"
+    status: missing

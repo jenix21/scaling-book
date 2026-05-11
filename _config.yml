@@ -14,6 +14,18 @@ footer_text: >
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
 keywords: scaling, jax, llms, transformers, tpus, google, deepmind, parallelism, pallas  # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
+
+# Multi-language navigation. Used by _includes/language_switcher.liquid and
+# _data/translations.yml. The English pages live at the repo root; Korean
+# translations mirror them under /ko/.
+languages:
+  - code: en
+    label: "English"
+    url_prefix: ""
+  - code: ko
+    label: "한국어"
+    url_prefix: "/ko"
+
 icon: favicon.ico # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://jax-ml.github.io # the base hostname & protocol for your site
@@ -218,6 +230,14 @@ defaults:
       path: "assets"
     values:
       sitemap: false
+  - scope:
+      path: ""
+    values:
+      lang: en
+  - scope:
+      path: "ko"
+    values:
+      lang: ko
 
 sass:
   style: compressed

@@ -88,9 +88,11 @@
       <li class="nav-item nav-hidden"><a class="nav-link" href="{{ page.next_section_url }}">Next Part</a></li>
  
           <!-- Other pages -->
+          {% assign cur_lang = page.lang | default: 'en' %}
           {% assign sorted_pages = site.pages | sort: 'nav_order' %}
           {% for p in sorted_pages %}
-            {% if p.nav and p.autogen == null %}
+            {% assign p_lang = p.lang | default: 'en' %}
+            {% if p.nav and p.autogen == null and p_lang == cur_lang %}
               {% if p.dropdown %}
                 {% assign has_active_child = false %}
                 {% for child in p.children %}
@@ -157,6 +159,7 @@
               </button>
             </li>
           {% endif %}
+          {% include language_switcher.liquid %}
           {% if site.enable_darkmode %}
             <!-- Toogle theme mode -->
             <li class="toggle-container">

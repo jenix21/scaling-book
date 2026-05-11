@@ -1,0 +1,51 @@
+{%- comment -%}
+  Language switcher. Determines the current page's slug from its source path
+  (`ko/foo.md` -> slug `foo`, `foo.md` -> slug `foo`, `index` is the front page)
+  and looks up the counterpart language URL in `_data/translations.yml`.
+
+  Shows the link only when the counterpart exists and its `status` is `complete`.
+  Otherwise renders a disabled label so the toggle is still discoverable but
+  doesn't lead to a 404.
+{%- endcomment -%}
+
+{%- assign cur_lang = page.lang | default: 'en' -%}
+{%- assign src_path = page.path | default: '' -%}
+
+{%- if src_path contains 'ko/' -%}
+  {%- assign slug = src_path | replace: 'ko/', '' | replace: '.md', '' -%}
+{%- else -%}
+  {%- assign slug = src_path | replace: '.md', '' -%}
+{%- endif -%}
+
+{%- assign status = 'missing' -%}
+{%- for ch in site.data.translations.chapters -%}
+  {%- if ch.slug == slug -%}
+    {%- assign status = ch.status -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if cur_lang == 'en' -%}
+  {%- if slug == 'index' -%}
+    {%- assign other_url = '/ko/' -%}
+  {%- else -%}
+    {%- assign other_url = '/ko/' | append: slug -%}
+  {%- endif -%}
+  {%- if status == 'complete' -%}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ other_url | relative_url }}" title="한국어로 보기">한국어</a>
+    </li>
+  {%- else -%}
+    <li class="nav-item">
+      <span class="nav-link" style="opacity: 0.45; cursor: not-allowed;" title="번역 준비 중">한국어</span>
+    </li>
+  {%- endif -%}
+{%- else -%}
+  {%- if slug == 'index' -%}
+    {%- assign other_url = '/' -%}
+  {%- else -%}
+    {%- assign other_url = '/' | append: slug -%}
+  {%- endif -%}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ other_url | relative_url }}" title="View in English">EN</a>
+  </li>
+{%- endif -%}
